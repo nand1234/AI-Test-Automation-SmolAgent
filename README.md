@@ -17,8 +17,8 @@ This project leverages [Hugging Face SmolAgent](https://huggingface.co/docs/smol
 1. **Clone the repository**  
    Clone the repository to your local machine:
    ```bash
-   git clone <repository-url>
-   cd <repository-folder>
+   git clone https://github.com/nand1234/AI-Test-Automation-SmolAgent.git
+   cd AI-Test-Automation-SmolAgent
    ```
 
 2. **Create a Python virtual environment**  
