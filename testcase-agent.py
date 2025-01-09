@@ -16,15 +16,15 @@ test_case_agent.run(
    """
 )
 
-# """
-# agent to create API tests
-# """
-# test_case_agent.run(
-#    """
-#    can you please write BDD style api test case using task "write_file" in for below requirement.
-#    rules: create single feature, include edge cases, use boundry value and equivalent partitioning test case creation technique. also, don't hallucinate or create madeup testcases.
-#    additional_args={"filename":'api_test.feature'}
-#    requirement: GET endpoint https://httpbin.org/get without query param
-#    """
-# )
+"""
+agent to create API tests
+"""
+test_case_agent.run(
+   """
+   can you please write BDD style api test case using task "write_file" in for below requirement.
+   rules: create single feature, include edge cases, use boundry value and equivalent partitioning test case creation technique. also, don't hallucinate or create madeup testcases.
+   additional_args={"filename":'api_test.feature'}
+   requirement: GET endpoint https://httpbin.org/get without query param
+   """
+)
 

@@ -2,7 +2,7 @@ from smolagents import CodeAgent, HfApiModel
 from tools.tools import report, read_testcase_file
 
 
-test_case_agent = CodeAgent(tools=[read_testcase_file,report], model=HfApiModel(), additional_authorized_imports=['requests', 'bs4', 'pytest-bdd'])
+test_case_agent = CodeAgent(tools=[read_testcase_file,report], model=HfApiModel(), additional_authorized_imports=['requests', 'bs4', 'pytest-bdd', 'json'])
 
 """
 Execute BDD style test cases from feature file
