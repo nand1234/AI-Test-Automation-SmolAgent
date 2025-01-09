@@ -1,0 +1,23 @@
+{
+  "scenario": "Basic GET request to /get endpoint",
+  "status": "passed",
+  "steps": [
+    {
+      "step": "Given the API endpoint \"https://httpbin.org/get\"",
+      "status": "passed"
+    },
+    {
+      "step": "When a GET request is made without query parameters",
+      "status": "passed"
+    },
+    {
+      "step": "Then the response status code should be 200",
+      "status": "passed"
+    },
+    {
+      "step": "And the response should contain the URL \"https://httpbin.org/get\"",
+      "status": "passed"
+    }
+  ],
+  "duration": 1.234
+}
