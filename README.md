@@ -63,8 +63,20 @@ Run Playwright-based tests with:
 ```bash
 python playwright-agent.py
 ```
-
+### 4. **BDD test case creation Agent**
+Run test case creatio with:
+```bash
+python testcase-agent.py
 ---
+
+```
+### 4. **BDD test case execution Agent**
+Run BDD test case execution:
+```bash
+python test-executor-agent.py
+---
+
+
 
 ## Key Insights
 
