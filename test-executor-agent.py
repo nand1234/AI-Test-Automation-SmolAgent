@@ -9,7 +9,7 @@ write test code
 """
 test_case_agent.run(
    """
-   can you save generated pytest code for test case file using request module
+   can you write and save pytest code for test case file using request module
    additional_args={"filename":'api_test.feature', "codefilename": "api_test.py", "code":"code_response"}
    """
 )
