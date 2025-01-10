@@ -1,5 +1,6 @@
 from smolagents import tool
 from huggingface_hub import list_models
+import subprocess
 
 
 @tool
@@ -68,3 +69,34 @@ def report(task: str) -> str:
 
     print(f"File created successfully")
     return f"saved filed name is result.json"
+
+@tool
+def write_pytest_code(codefilename: str, task: str) -> str:
+    """
+    This is a tool write pytest code in the file
+    It returns saved filename.
+
+    Args:
+        task: The task to write pytest code in file
+        codefilename: name of the test code file.
+    """
+    with open(f"test_cases/{codefilename}", 'w') as file:
+        file.write(task)
+
+    print(f"File created successfully")
+    return f"saved filed name is: {codefilename}"
+
+@tool
+def execute_api_test(codefilename: str, task: str) -> str:
+    """
+    This is a tool is to execute api test using pytest
+    It returns saved filename.
+
+    Args:
+        task: The task to pytest code in file
+        codefilename: name of the test code file.
+    """
+    result = subprocess.run(['pytest', './test_cases/{}'.format(codefilename), '--html=report.html'], capture_output=True, text=True)    
+    
+    print(result.stdout)
+    return f"saved filed name is: {codefilename}"
