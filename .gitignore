@@ -1,7 +1,5 @@
 venv
 tools/__pycache__
 __pycache__
-assets
 .pytest_cache
-report.html
 test_cases/api_test.py
