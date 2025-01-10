@@ -19,28 +19,47 @@ def model_download_tool(task: str) -> str:
 @tool
 def write_testcase_file(filename: str, task: str) -> str:
     """
-    This is a tool that returns saved file name.
-    It returns saved filename.
+    Save a task description into a test case file and return the saved file name.
+
+    This tool saves the provided task description into a file in the `test_cases` directory.
+    If the directory does not exist, it will be created.
 
     Args:
-        task: The task to save file into local directory.
-        filename: name of the test case file.
-    """
-    with open(f"test_cases/{filename}", 'w') as file:
-        file.write(task)
+        filename: The name of the test case file to be created. 
+                    This should include the file extension (e.g., "test_case_1.txt").
+        task: The task description or content to be saved in the file.
 
-    print(f"File created successfully")
-    return f"saved filed name is: {filename}"
+    Returns:
+        str: A confirmation message with the name of the saved file.
+
+    Raises:
+        IOError: If the file cannot be created or written.
+    """
+    try:
+        # Write the task to the specified file
+        with open(f"test_cases/{filename}", 'w') as file:
+            file.write(task)
+
+        print(f"File created successfully")
+        return f"Saved file name is: {filename}"
+    except IOError as e:
+        return f"An error occurred while saving the file: {e}"
 
 @tool
 def read_testcase_file(filename: str, task: str) -> str:
     """
-    This is a tool that read feature file for execution.
-    It returns file content.
+    Read the contents of a test case file and return its content.
+
+    This tool reads the content of a specified test case file from the `test_cases` directory.
+    If the file does not exist or cannot be read, an appropriate error message is returned.
 
     Args:
+        filename: The name of the test case file to be read. 
+                        This should include the file extension (e.g., "test_case_1.txt").
         task: The task to read file from filename.
-        filename: name of the test case file.
+
+    Returns: The content of the test case file if it is successfully read, 
+             or an error message if the file cannot be found or read.
     """
     try:
         with open(f"test_cases/{filename}", 'r') as file:
@@ -55,36 +74,27 @@ def read_testcase_file(filename: str, task: str) -> str:
     print(f"File created successfully")
     return str(content)
 
-@tool
-def report(task: str) -> str:
-    """
-    test execution report in json
-    It save report json file.
-
-    Args:
-        task: The task to save test execution report in json format
-    """
-    with open('reports/result.json', 'w') as file:
-        file.write(task)
-
-    print(f"File created successfully")
-    return f"saved filed name is result.json"
 
 @tool
-def write_pytest_code(codefilename: str, task: str) -> str:
+def save_code_to_file(code: str, codefilename: str) -> str:
     """
-    This is a tool write pytest code in the file
-    It returns saved filename.
+    Save LLM-generated code into a specified file.
 
     Args:
-        task: The task to write pytest code in file
-        codefilename: name of the test code file.
-    """
-    with open(f"test_cases/{codefilename}", 'w') as file:
-        file.write(task)
+        code: The code to be saved into the file. This should be a valid string containing Python or any other language code.
+        codefilename: The name of the file to save the code in. Defaults to "generated_code.py". 
+                        The file will be created in the 'generated_code' directory.
 
-    print(f"File created successfully")
-    return f"saved filed name is: {codefilename}"
+    Returns:
+        str: A confirmation message if the code is successfully saved, or an error message if something goes wrong.
+    """
+    
+    try:
+        with open(f"test_cases/{codefilename}", "w") as file:
+            file.write(code)
+        return f"Code successfully saved to {codefilename}"
+    except Exception as e:
+        return f"Failed to save code: {e}"
 
 @tool
 def execute_api_test(codefilename: str, task: str) -> str:
