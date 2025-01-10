@@ -37,7 +37,7 @@ def write_testcase_file(filename: str, task: str) -> str:
     """
     try:
         # Write the task to the specified file
-        with open(f"test_cases/{filename}", 'w') as file:
+        with open(f"features/{filename}", 'w') as file:
             file.write(task)
 
         print(f"File created successfully")
@@ -62,7 +62,7 @@ def read_testcase_file(filename: str, task: str) -> str:
              or an error message if the file cannot be found or read.
     """
     try:
-        with open(f"test_cases/{filename}", 'r') as file:
+        with open(f"features/{filename}", 'r') as file:
             content = file.read()
     except FileNotFoundError:
         return "Error: File not found."
@@ -90,7 +90,7 @@ def save_code_to_file(code: str, codefilename: str) -> str:
     """
     
     try:
-        with open(f"test_cases/{codefilename}", "w") as file:
+        with open(f"src/{codefilename}", "w") as file:
             file.write(code)
         return f"Code successfully saved to {codefilename}"
     except Exception as e:
@@ -106,7 +106,7 @@ def execute_api_test(codefilename: str, task: str) -> str:
         task: The task to pytest code in file
         codefilename: name of the test code file.
     """
-    result = subprocess.run(['pytest', './test_cases/{}'.format(codefilename), '--html=report.html'], capture_output=True, text=True)    
+    result = subprocess.run(['pytest', './src/{}'.format(codefilename), '--html=report/report.html'], capture_output=True, text=True)    
     
     print(result.stdout)
     return f"saved filed name is: {codefilename}"
