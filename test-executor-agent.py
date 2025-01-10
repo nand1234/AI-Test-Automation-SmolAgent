@@ -9,7 +9,7 @@ Execute BDD style test cases from feature file
 """
 test_case_agent.run(
    """
-   can you Execute BDD test case using pytest-bdd using task "read_file" return test execution report in json format using task "report"
+   can you Execute BDD test case using pytest-bdd return execution report in json and save report
    additional_args={"filename":'api_test.feature'}
    """
 )
