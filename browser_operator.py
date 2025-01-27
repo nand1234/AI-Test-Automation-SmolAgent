@@ -97,6 +97,24 @@ def go_back() -> None:
 
 
 @tool
+def close_browser() -> str:
+    """
+    close browser after final answer
+    """
+    driver.quit()
+    
+@tool
+def close_cookie_popup() -> str:
+    """
+    accept any visible cookie consent banners.
+    """
+    wait = WebDriverWait(driver, timeout=0.5)
+    elements = wait.until(EC.presence_of_all_elements_located((By.ID, "onetrust-accept-btn-handler")))
+    elements[0].click()
+
+
+
+@tool
 def close_popups() -> str:
     """
     Closes any visible modal or pop-up on the page. Use this to dismiss pop-up windows! This does not work on cookie consent banners.
@@ -140,7 +158,7 @@ def close_popups() -> str:
 
 
 agent = CodeAgent(
-    tools=[go_back, close_popups, search_item_ctrl_f],
+    tools=[go_back, close_popups, search_item_ctrl_f, close_cookie_popup, close_browser],
     model=model,
     additional_authorized_imports=["helium"],
     step_callbacks=[save_screenshot],
@@ -205,12 +223,12 @@ To list elements on page, DO NOT try code-based element searches like 'contribut
 Of course, you can act on buttons like a user would do when navigating.
 After each code blob you write, you will be automatically provided with an updated screenshot of the browser and the current browser url.
 But beware that the screenshot will only be taken at the end of the whole action, it won't see intermediate states.
-Don't kill the browser.
 """
 
 
 search_request = """
-Please navigate to https://gh-users-search.netlify.app/ and enter nand in input field and click on submits button.
+navigate to url URL and add item to cart click, click nex
+and check url has checkout
 """
 
 agent.run(search_request + helium_instructions)
