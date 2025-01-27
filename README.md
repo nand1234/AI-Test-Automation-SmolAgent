@@ -76,6 +76,13 @@ Run BDD test case execution:
 python test-executor-agent.py
 ---
 
+```
+### 4. **run browser operator**
+Run browser actions:
+```bash
+python browser_operator.py
+---
+
 
 
 ## Key Insights
