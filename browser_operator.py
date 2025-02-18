@@ -10,35 +10,17 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from smolagents import CodeAgent, LiteLLMModel, OpenAIServerModel, TransformersModel, tool  # noqa: F401
+from smolagents import CodeAgent, HfApiModel, LiteLLMModel, OpenAIServerModel, TransformersModel, tool  # noqa: F401
 from smolagents.agents import ActionStep
+
 
 
 load_dotenv()
 import os
 
 
-# Let's use Qwen-2VL-72B via an inference provider like Fireworks AI
-
-model = OpenAIServerModel(
-    api_key=os.getenv("FIREWORKS_API_KEY"),
-    api_base="https://api.fireworks.ai/inference/v1",
-    model_id="accounts/fireworks/models/qwen2-vl-72b-instruct",
-)
-
-# You can also use a close model
-
-# model = LiteLLMModel(
-#     model_id="gpt-4o",
-#     api_key=os.getenv("OPENAI_API_KEY"),
-# )
-
-# locally a good candidate is Qwen2-VL-7B-Instruct
-# model = TransformersModel(
-#     model_id="Qwen/Qwen2-VL-7B-Instruct",
-#     device_map = "auto",
-#     flatten_messages_as_text=False
-# )
+model_id = "meta-llama/Llama-3.3-70B-Instruct"  # You can change this to your preferred model
+model = HfApiModel()
 
 
 # Prepare callback
@@ -181,11 +163,6 @@ Code:
 click("Top products")
 ```<end_code>
 
-If it's a link:
-Code:
-```py
-click(Link("Top products"))
-```<end_code>
 
 If you try to interact with an element and it's not found, you'll get a LookupError.
 In general stop your action after each button click to see what happens on your screenshot.
@@ -219,16 +196,10 @@ final_answer("YOUR_ANSWER_HERE")
 ```<end_code>
 
 If pages seem stuck on loading, you might have to wait, for instance `import time` and run `time.sleep(5.0)`. But don't overuse this!
-To list elements on page, DO NOT try code-based element searches like 'contributors = find_all(S("ol > li"))': just look at the latest screenshot you have and read it visually, or use your tool search_item_ctrl_f.
-Of course, you can act on buttons like a user would do when navigating.
-After each code blob you write, you will be automatically provided with an updated screenshot of the browser and the current browser url.
-But beware that the screenshot will only be taken at the end of the whole action, it won't see intermediate states.
 """
 
 
 search_request = """
-navigate to url URL and add item to cart click, click nex
-and check url has checkout
-"""
+can you navigate to website https://www.smartbox.com/fr/nos-smartbox/sejour/3-jours-de-reve-en-amoureux-848120.html and add item to cart """
 
 agent.run(search_request + helium_instructions)
